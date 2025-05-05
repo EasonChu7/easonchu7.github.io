@@ -4,126 +4,128 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Yi-Shan Chu – Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-  >
-  <link
-          href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans&display=swap"
-          rel="stylesheet"
-  >
-  <link
-          href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
           rel="stylesheet"
   >
   <style>
-    html, body {
-      height:100%; margin:0; padding:0;
-      color:#eee; font-family:'Open Sans',sans-serif;
-      /* 保留 body 的 padding-bottom 避免被 footer 遮挡 */
-      padding-bottom: 4rem;
-      display:flex; flex-direction:column;
-      /* 这儿可以去掉渐变背景，把视觉重心交给 Vanta */
-      /* background: linear-gradient(45deg, #0d1117, #112240, #0d1117);
-      background-size: 600% 600%;
-      animation: gradientShift 12s ease infinite; */
-    }
-    /*@keyframes gradientShift {...}*/
-
-    #particles-js {
-      position:fixed; top:0; left:0;
-      width:100%; height:100%;
-      pointer-events:none;
-      z-index:0;
-    }
-
-    body > *:not(#particles-js) {
-      position: relative;
-      z-index: 1;
-    }
-
-    .navbar { background:#161b22; }
+    html, body { margin:0; padding:0; width:100%; height:100%; scroll-behavior: smooth; background:#0d1117; color:#eee; font-family:'Open Sans',sans-serif; }
+    #particles-js { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+    body > *:not(#particles-js) { position:relative; z-index:1; }
+    .navbar { background:transparent; transition: background 0.3s; }
+    .navbar.scrolled { background:rgba(22,27,34,0.9); }
     .navbar-brand, .nav-link { color:#eee!important; }
     .nav-link:hover, .nav-link.active { color:#58a6ff!important; }
+    #progress-bar { position:fixed; top:0; left:0; height:3px; background:#58a6ff; width:0; z-index:2; transition:width 0.2s; }
 
-    #progress-bar {
-      position:fixed; top:0; left:0;
-      height:4px; background:#58a6ff;
-      width:0; z-index:2;  /* 保证最高，盖在内容上 */
-    }
+    /* Hero Section */
+    .hero { min-height:calc(100vh - 56px); display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.5); }
+    .hero-container { max-width:1140px; margin:auto; display:flex; flex-wrap:wrap; align-items:center; gap:3rem; padding:2rem; }
+    .hero-img { flex:1 1 250px; text-align:center; }
+    .hero-img img { border-radius:0; width:250px; height:250px; object-fit:cover; border:1px solid #58a6ff; transition: transform 0.4s; }
+    .hero-img img:hover { transform:scale(1.1); }
+    .hero-content { flex:2 1 400px; }
+    .hero-content h1 { font-family:'Merriweather',serif; font-size:3rem; margin-bottom:1rem; text-shadow:0 0 8px rgba(88,166,255,0.6); }
+    .hero-content .lead { font-size:1.1rem; margin-bottom:0.75rem; line-height:1.5; }
+    .typed-text { font-size:1.2rem; margin-top:1rem; color:#58a6ff; font-family:'Merriweather',serif; }
 
-    .hero {
-      margin-top:56px; height:50vh;
-      display:flex; align-items:center; justify-content:center;
-      text-align:center;
-      background:rgba(0,0,0,0.4); backdrop-filter:blur(8px);
-    }
-    .hero-content h1,
-    .typed-text {
-      font-family:'Merriweather',serif;
-      text-shadow:
-              0 0 6px rgba(88,166,255,0.5),
-              0 0 12px rgba(88,166,255,0.4);
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-    .hero-content h1 { font-size:3rem; margin-bottom:.5rem; }
-    .hero-content p.lead {
-      margin:.25rem 0;
-      text-shadow:0 0 6px rgba(0,0,0,0.6);
-    }
-    .typed-text {
-      color:#58a6ff; font-size:1.25rem; margin-top:1rem;
-    }
-    @keyframes pulseGlow {
-      0%,100% {
-        text-shadow:
-                0 0 6px rgba(88,166,255,0.5),
-                0 0 12px rgba(88,166,255,0.4);
-      }
-      50% {
-        text-shadow:
-                0 0 12px rgba(88,166,255,0.7),
-                0 0 24px rgba(88,166,255,0.5);
-      }
-    }
+    /* About Section */
+    #about { padding:4rem 1rem; background:rgba(17,20,26,0.8); }
+    #about .container { max-width:900px; }
+    #about h2 { font-size:2rem; margin-bottom:1rem; color:#58a6ff; }
+    #about p { line-height:1.6; }
 
+    /* Footer */
+    footer { background:#161b22; text-align:center; padding:1rem 0; position:fixed; bottom:0; width:100%; }
+    footer .container { max-width:900px; }
 
-    section#about {
-      width:100%;
-      background: rgba(17,20,26,0.85);
-      padding:4rem 0;
+    /* Transitions */
+    section { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease-out, transform 0.6s ease-out; }
+    section.in-view { opacity:1; transform:translateY(0); }
+    .social-icons a {
+      color: #eee;
+      transition: color .3s;
     }
-    section#about .container {
-      max-width:960px;
-    }
-
-    footer {
-      position:fixed;    /* ← 固定在底部 */
-      bottom:0; left:0;
-      width:100%;
-      background:#161b22;
-      padding:1rem 0;
-      text-align:center;
-      z-index:2;
-    }
-    footer .container {
-      max-width:960px;
+    .social-icons a:hover {
+      color: #007bff;
     }
   </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="57">
+
+<div
+        class="modal fade"
+        id="phdModal"
+        tabindex="-1"
+        aria-labelledby="phdModalLabel"
+        aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="phdModalLabel">
+          PhD Opportunities &amp; Research Interests
+        </h5>
+        <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          I am looking to further my research in learning theory in either Math, Statistics, or CS. My main
+          interests include (Sorted by interest, from top to bottom):
+        </p>
+        <ul>
+          <li>
+            <strong>Computational/Statistical Learning Theory &amp; Mathematical Foundation of AI</strong><br>
+            Exploring new-type models/algorithms/theories and mathematical foundations of learning and AI. In either numerical, analysis, or probabilistic way, I want to focus my research on the basic theories of learning.
+          </li>
+
+          <li>
+            <strong>AI Applications &amp; Deployable AI</strong><br>
+            Develop production-ready AI pipelines in any of applications such as robotics, remote sensing, medical, etc. Especially interest in exploring innovative solutions such as Edge computing.
+          </li>
+          <li>
+            <strong>Quantum Learning &amp; Generative Artificial Intelligence</strong><br>
+            Applying quantum computing techniques in learning tasks such as variational quantum circuits. Also interested in develop generative models such as GAN and Diffusion.
+          </li>
+        </ul>
+        <p>
+          If you know of any PhD positions, funding opportunities, or labs
+          working on these topics, please feel free to reach out! <a href="mailto:easonchu7@gmail.com" title="Email">Email Me!</a>
+        </p>
+      </div>
+      <div class="modal-footer border-0">
+        <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<body>
 <div id="particles-js"></div>
 <div id="progress-bar"></div>
 
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="index.html">Yi-Shan Chu</a>
+    <a class="navbar-brand" href="#home">Yi-Shan Chu</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">Profile</a></li>
         <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
         <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
         <li class="nav-item"><a class="nav-link" href="awards.html">Awards</a></li>
@@ -133,64 +135,85 @@
   </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero" id="home" data-aos="zoom-in">
-  <div class="container hero-content">
-    <h1>Hi, I’m Yi-Shan Chu</h1>
-    <p class="lead">Undergraduate Student in National Chengchi University, Taiwan.</p>
-<!--    <p class="lead">AI Researcher & Data Scientist</p>-->
-    <p class="lead">A Member of IMA in UK</p>
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div class="hero-img" data-aos="fade-right">
+      <img src="src/images/IMG_0851.jpg" alt="Yi-Shan Chu">
+    </div>
+    <div class="hero-content" data-aos="fade-left">
+      <h1>Yi-Shan Chu (Eason Chu)</h1>
+      <p class="social-icons d-flex justify-content-center gap-3 fs-3">
+        <!-- Mail -->
+        <a href="mailto:easonchu7@gmail.com" title="Email">
+          <i class="bi bi-envelope-fill"></i>
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com/EasonChu7" target="_blank" title="GitHub">
+          <i class="bi bi-github"></i>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/eason-chu-11764b297" target="_blank" title="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+      </p>
+      <p class="lead">Undergraduate Student @ <a href="https://www.nccu.edu.tw/" class="text-decoration-none text-reset">National Chengchi University</a>, Taiwan.</p>
+      <p class="lead">Research Assistant @ <a href="https://disc.stat.sinica.edu.tw/" class="text-decoration-none text-reset">Academia Sinica Data Science Statistical Cooperation Center</a>, Taiwan.</p>
+      <p class="lead">Contract AI Researcher @ <a href="https://www.tasa.org.tw/zh-TW" class="text-decoration-none text-reset">Space Agency(TASA) Division of Satellite Data Applications</a>, Taiwan.</p>
+      <p class="lead">A Member @ <a href="https://ima.org.uk/" class="text-decoration-none text-reset">IMA(UK).</a></p>
+      <div class="typed-text" id="typed"></div>
 
-    <div class="typed-text" id="typed"></div>
+      <div class="hero-content" data-aos="fade-left">
+        <h4
+                data-aos="fade-up"
+                data-aos-delay="600"
+                class="text-center mt-4"
+        >
+          <button
+                  type="button"
+                  class="btn btn-outline-light btn-lg cta-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#phdModal"
+          >
+            🔍 Looking For PhD Opportunities
+          </button>
+        </h4>
+      </div>
+
+
+    </div>
   </div>
 </section>
 
-<!-- About (半透明) -->
-<section id="about" data-aos="fade-up" data-aos-delay="200">
+<section id="about">
   <div class="container">
     <h2>Profile</h2>
-    <p>
-      Self-driven AI researcher pursuing a double major in Mathematics and Computer Science (AI Applications) at NCCU (GPA 3.93/4.0).
-      Passionate about Edge AI, Computer Vision, and Quantum Generative AI, with research recognized at IMA AI/ML Congress (Best Paper Presentation)
-      and ICST 2024. Former TASA intern, applying AI to remote sensing disaster analysis,
-      published at TASTI 2024. Currently a research assistant at Academia Sinica, conducting AI research under contract with TASA.
-    </p>
+    <p>Self-driven AI researcher pursuing a double major in Mathematics and Computer Science (AI Applications) at NCCU (GPA 3.93/4.0). Passionate about Edge AI, Computer Vision, and Quantum Generative AI, with research recognized at IMA AI/ML Congress (Best Paper Presentation) and ICST 2024. Former TASA intern, applying AI to remote sensing disaster analysis, published at TASTI 2024. Currently a research assistant at Academia Sinica, conducting AI research under contract with TASA.</p>
   </div>
 </section>
 
-<!-- Footer (固定底部) -->
-<footer data-aos="fade-up" data-aos-delay="400">
-  <div class="container">&copy; 2025 Yi-Shan Chu</div>
+<footer>
+  <div class="container">&copy; 2025 Yi-Shan Chu. easonchu7@gmail.com</div>
 </footer>
 
-<!-- 脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.net.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded',()=>{
-    new Typed('#typed',{ strings:[
-        'Computational Learning Theory',
-        'Edge AI Architectures',
-        'Satellite & UAV Analysis',
-        'Computer Vision'
-      ], typeSpeed:60, backSpeed:30, loop:true });
-    AOS.init({ duration:1000, once:true });
-    VANTA.NET({
-      el: "#particles-js",
-      mouseControls:true, touchControls:true, gyroControls:false,
-      minHeight:200.00, minWidth:200.00,
-      scale:1.00, scaleMobile:1.00,
-      color:0x58a6ff, backgroundColor:0x0d1117,
-      maxDistance:25.00, spacing:20.00, showDots:false
-    });
-    window.addEventListener('scroll',()=>{
-      const h=document.documentElement.scrollHeight - window.innerHeight;
-      document.getElementById('progress-bar').style.width = (window.pageYOffset/h)*100 + '%';
-    });
+  new Typed('#typed', { strings: ['Computational Learning Theory', 'Edge AI Architectures', 'Satellite & UAV Analysis', 'Computer Vision', 'Quantum Computing'], typeSpeed:60, backSpeed:30, loop:true });
+  AOS.init({ duration:1000, once:true });
+  VANTA.NET({ el:'#particles-js', mouseControls:true, touchControls:true, gyroControls:false, minHeight:200, minWidth:200, scale:1, scaleMobile:1, color:0x58a6ff, backgroundColor:0x0d1117, maxDistance:25, spacing:20, showDots:false });
+  const nav = document.querySelector('.navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress-bar').style.width = (window.pageYOffset/h)*100 + '%';
   });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('in-view'));
+  }, { threshold:0.1 });
+  document.querySelectorAll('section').forEach(sec => observer.observe(sec));
 </script>
 </body>
 </html>

@@ -14,6 +14,16 @@
         .fade-in.visible { opacity: 1; transform: none; }
         ol li { margin-bottom: 1rem; }
     </style>
+    <style>
+        /* 新增：將 footer 固定在視窗底部 */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;      /* 確保在其他內容之上 */
+        }
+    </style>
 </head>
 <body>
 <div id="progress-bar"></div>
